@@ -44,7 +44,7 @@ Even though this is a document about services, it's important to point out that 
 
 ***Performance and reliability*** Libraries live in the same address space as the calling process, whereas services live on the other end of a network cable. All other things being equal, it's going to be faster and more reliable to access your feature as a library. However, if your feature has high resource requirements (e.g. CPU, memory or disk) then implementing it as a service can allow clients to run more efficiently and allow the service hardware to be scaled independently of the client hardware.
 
-***Technology independence*** For the most part, Yelp is a Python shop, with a few Java systems on the backend. If your feature does need to be accessed by both Python and Java clients, then writing it as a service is going to allow you to avoid writing two different library implementations (one for each of Python and Java).
+***Technology independence*** For the most part, Grand Rounds is a ruby shop, with a few other languages on the backend (python, java). If your feature does need to be accessed by different clients, then writing it as a service is going to allow you to avoid writing two different library implementations (one for each language).
 
 ### Services are curated by teams, not individuals
 
