@@ -58,7 +58,7 @@ When you write any code, you are committing your team to providing ongoing maint
 
 The initial rollout of a service often takes longer than you might think. Sometimes a lot longer. This could be due to unexpected interactions between other services or difficulties in setting up the right monitoring. Load testing is rarely perfect so plan on going through several stages and iterations before being 100% deployed.
 
-### Prefer larger services 
+### Prefer larger services
 
 Aim to place related functionality into a single, larger service instead of multiple, smaller services. Note that your larger service should be logically cohesive i.e. you should still be able to concisely describe its behavior. The rationale for this guideline is as follows:
 
@@ -95,14 +95,14 @@ When designing an interface, follow best-practices such as:
 * Have one obvious way of performing each operation.
 * When porting to a service your existing functions won’t necessarily make the best network endpoints. Remote execution changes the nature of consistency, reliability, and performance. Design your service boundary to be loosely coupled with other systems.
 * Separate the interfaces that read from those that update. (See [CQRS](http://martinfowler.com/bliki/CQRS.html) as an example)
-* Minimise and simplify the interface as much as possible. This will also aid in testing. 
+* Minimise and simplify the interface as much as possible. This will also aid in testing.
 * Document any areas where confusion may arise.
 * Ask yourself: "Could a new-hire understand your interface without having to talk to you?"
 
 ### Interfaces should be robust
 
 Design your interface as if it is going to be exposed to the wider Internet. Only expose information [that is strictly required by clients](http://en.wikipedia.org/wiki/Law_of_Demeter). Where possible, avoid providing unsafe or expensive operations.
-	 	
+
 Differentiate between read-only methods vs those that change state. Ideally your read-only methods are idempotent and cacheable.
 
 ### Changes to interfaces should be backwards compatible
@@ -113,13 +113,15 @@ Your interfaces should have some versioning mechanism. When you change a service
 
 ### Any changes to your service should be able to be tested automatically
 
-Yelp doesn't employ separate QA engineers. Instead, we rely on computers to do our validation. You are responsible for maintaining a good test suite for your service. Your tests should run quickly and reliably in both dev and test environments.
+Grand Rounds does employ QA engineers -- but they are here to assure that we follow and improve our quality process, not necessarily to click buttons and find out your code is broken. We try to rely on computers to do our validation. You are responsible for maintaining a good test suite for your service. Your tests should run quickly and reliably in both dev and test environments.
 
 A good test suite is like a pyramid. At the base are your unit tests: many fast, small tests that validate individual implementation details of your code. In the middle are your integration tests, in which you validate how various components of your service interact. At the top is a small but critical set of acceptance tests that validate your service works correctly with dependent services.
 
+We do have some automated (and manual) multi-service "smoke" tests (and testers that run them).  However, remember that these folks and tests will only find out if your service blows up spectacularly when running a reasonable happy path. Also, they rely on the stability of user-visible interfaces (which, uh, aren't stable, and aren't nearly all our interfaces). You, they, and we will all be happier if your automated tests verify that your users (API consumers, whatever) are happy.  If your users are willing to tell you what to test, and provide you with tests that prove your service does what they need, *make those tests yours*!
+
 ### Your interface is the most important thing to test
 
-Your interface is an important part of your contract. The interface is what your clients use and interact with. If you change your interface and break or change how it behaves you're affecting all clients of your service. This can have widespread impact. 
+Your interface is an important part of your contract. The interface is what your clients use and interact with. If you change your interface and break or change how it behaves you're affecting all clients of your service. This can have widespread impact.
 
 This is why your interface is the most vital component to test. Your interface tests will tell you what your client actually sees, while your remaining tests will inform you on how to ensure your clients see those results. Ensure that all active versions of your interface perform consistently. Write these tests as early as possible, since the desired behavior from a blackbox testing perspective should be driving your interface design.
 
