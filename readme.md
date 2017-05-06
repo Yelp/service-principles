@@ -143,7 +143,7 @@ It's okay for different services to have different operational guarantees. The u
 
 One of the major defining features of a Service Oriented Architecture is a vast increase in the number of possible failure scenarios in your distributed system. Operationally, this means your service must strive to be honest about the collaborating services and datastores it requires to operate, and those whose downtime can be gracefully handled.
 
-Plan from the start of your service to identify external dependencies and document your relationship to them. Place metrics on external links, and put in place both passive and developer-operated protections so you can protect your service against external failures. Finally, make sure you actively monitor these potential weak points, and alert your on-call team appropriate depending on their severity.
+Plan from the start of your service to identify external dependencies and document your relationship to them. Place metrics on external links, and put in place both passive and developer-operated protections so you can protect your service against external failures. Finally, make sure you actively monitor these potential weak points, and alert your on-call team appropriately depending on their severity.
 
 In addition, your service will likely be running across multiple machines, racks, and datacenters, each with their own possibility of failure. Understand how your service will behave under each scenario.
 
